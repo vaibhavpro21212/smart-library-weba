@@ -1,0 +1,132 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <title>Smart Library</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <style>
+            body { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
+            .book-card {
+                box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+                transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            }
+            .book-card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            }
+            .horizontal-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+            .horizontal-scroll::-webkit-scrollbar { display: none; }
+            .modal { transition: opacity 0.3s ease, transform 0.3s ease; }
+        </style>
+    </head>
+    <body class="bg-gray-50">
+        <header class="bg-white shadow-sm sticky top-0 z-20">
+            <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
+                <h1 class="text-2xl font-bold text-gray-900 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                    Smart Library
+                </h1>
+            </div>
+        </header>
+        <main id="library-container" class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 space-y-8 px-4">
+            <div id="loading-state" class="flex justify-center items-center py-20">
+                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+            </div>
+        </main>
+        <div id="modal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 opacity-0 pointer-events-none scale-95 z-50">
+            <div id="modal-content" class="bg-white w-full max-w-sm rounded-2xl shadow-xl p-6 relative transform transition-transform duration-300">
+                <button id="close-modal" class="absolute top-3 right-3 text-gray-400 hover:text-gray-700"><svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
+                <h2 id="modal-title" class="text-2xl font-bold text-gray-800 mb-1 pr-8">Book Title</h2>
+                <p id="modal-author" class="text-md text-gray-500 mb-4">by Author</p>
+                <p id="modal-status" class="text-sm font-semibold mb-4 inline-block px-3 py-1 rounded-full"></p>
+                <p id="modal-description" class="text-gray-600 mb-2 h-32 overflow-y-auto"></p>
+            </div>
+        </div>
+        <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+            import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+            const firebaseConfig = {
+                apiKey: "AIzaSyDB9oY6IJciaFp1THAJ0VeI7rpSrefj5sk",
+                authDomain: "smartlibrary-e03f7.firebaseapp.com",
+                projectId: "smartlibrary-e03f7",
+                storageBucket: "smartlibrary-e03f7.appspot.com",
+                messagingSenderId: "524474984955",
+                appId: "1:524474984955:web:4cb81fb71499be9425835e"
+            };
+            let db;
+            try {
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+            } catch (e) {
+                document.getElementById('loading-state').innerHTML = `<p class="text-red-500">Error: Could not connect to the database.</p>`;
+            }
+            const libraryContainer = document.getElementById('library-container');
+            const loadingState = document.getElementById('loading-state');
+            const modal = document.getElementById('modal');
+            function listenForLibraryChanges() {
+                if (!db) return;
+                const shelvesRef = collection(db, "shelves");
+                const booksRef = collection(db, "books");
+                onSnapshot(shelvesRef, (shelvesSnapshot) => {
+                    onSnapshot(booksRef, (booksSnapshot) => {
+                        const shelves = shelvesSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                        const books = booksSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                        const booksByShelf = books.reduce((acc, book) => { (acc[book.shelfId] = acc[book.shelfId] || []).push(book); return acc; }, {});
+                        const libraryData = shelves.map(shelf => ({ shelf, books: booksByShelf[shelf.id] || [] })).sort((a, b) => a.shelf.name.localeCompare(b.shelf.name));
+                        renderLibrary(libraryData);
+                    });
+                });
+            }
+            function renderLibrary(libraryData) {
+                loadingState.style.display = 'none';
+                libraryContainer.innerHTML = '';
+                if (libraryData.length === 0) { libraryContainer.innerHTML = `<p class="text-gray-500 text-center">No shelves found.</p>`; return; }
+                libraryData.forEach(shelfData => {
+                    const shelfSection = document.createElement('section');
+                    shelfSection.className = 'space-y-4';
+                    const shelfBooksHTML = shelfData.books.map(book => `
+                        <div class="book-card bg-white rounded-lg p-3 w-32 flex-shrink-0 cursor-pointer" data-book='${JSON.stringify(book)}'>
+                            <div class="bg-gray-200 h-32 rounded-md mb-2 flex items-center justify-center">
+                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                            </div>
+                            <h3 class="font-semibold text-sm text-gray-800 truncate">${book.title}</h3>
+                            <p class="text-xs text-gray-500 truncate">${book.author}</p>
+                        </div>
+                    `).join('');
+                    shelfSection.innerHTML = `
+                        <h2 class="text-xl font-bold text-gray-900">${shelfData.shelf.name}</h2>
+                        <div class="horizontal-scroll flex items-stretch overflow-x-auto space-x-4 pb-4">
+                            ${shelfBooksHTML || `<p class="text-sm text-gray-500">No books on this shelf.</p>`}
+                        </div>
+                    `;
+                    libraryContainer.appendChild(shelfSection);
+                });
+            }
+            function showModal(bookData) {
+                document.getElementById('modal-title').innerText = bookData.title;
+                document.getElementById('modal-author').innerText = `by ${bookData.author}`;
+                document.getElementById('modal-description').innerText = bookData.description || 'No description available.';
+                const statusEl = document.getElementById('modal-status');
+                const statusText = bookData.status.charAt(0).toUpperCase() + bookData.status.slice(1);
+                statusEl.innerText = statusText;
+                statusEl.className = `text-sm font-semibold mb-4 inline-block px-3 py-1 rounded-full ${bookData.status === 'available' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`;
+                modal.classList.remove('opacity-0', 'pointer-events-none', 'scale-95');
+            }
+            function closeModal() {
+                modal.classList.add('opacity-0', 'scale-95');
+                setTimeout(() => modal.classList.add('pointer-events-none'), 300);
+            }
+            libraryContainer.addEventListener('click', (e) => {
+                const bookCard = e.target.closest('.book-card');
+                if (bookCard) { showModal(JSON.parse(bookCard.dataset.book)); }
+            });
+            document.getElementById('close-modal').addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => { if (e.target.id === 'modal') { closeModal(); } });
+            listenForLibraryChanges();
+        </script>
+    </body>
+    </html>
+    
+
