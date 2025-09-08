@@ -90,7 +90,6 @@
     <div id="modal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 opacity-0 pointer-events-none scale-95 z-50">
         <div id="modal-content" class="bg-white w-full max-w-sm rounded-2xl shadow-xl p-6 relative">
             <button id="close-modal" class="absolute top-3 right-3 text-gray-400 hover:text-gray-700"><svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
-            <!-- UPDATED: Thumbnail in modal -->
             <img id="modal-thumbnail" src="" class="w-24 h-36 object-cover rounded-md float-left mr-4 mb-2 shadow-lg" alt="Book Cover">
             <h2 id="modal-title" class="text-2xl font-bold text-gray-800 mb-1">Book Title</h2>
             <p id="modal-author" class="text-md text-gray-500 mb-4">by Author</p>
@@ -169,14 +168,17 @@
         function createBookCard(book) {
             const placeholderIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>`;
             
-            // UPDATED: Use image tag for thumbnail, with a fallback
-            const thumbnailHTML = book.thumbnailUrl 
-                ? `<img src="${book.thumbnailUrl}" alt="${book.title}" class="w-full h-full object-cover">`
+            // --- THIS IS THE FIX ---
+            // It ensures the URL is HTTPS before trying to display it.
+            const secureThumbnailUrl = book.thumbnailUrl ? book.thumbnailUrl.replace('http://', 'https://') : '';
+            
+            const thumbnailHTML = secureThumbnailUrl 
+                ? `<img src="${secureThumbnailUrl}" alt="${book.title}" class="w-full h-full object-cover">`
                 : `<div class="w-full h-full flex items-center justify-center bg-gray-200">${placeholderIcon}</div>`;
 
             const bookCard = document.createElement('div');
             bookCard.className = 'book-card bg-white rounded-lg p-3 cursor-pointer';
-            bookCard.setAttribute('data-book', JSON.stringify(book)); // Store data on the element
+            bookCard.setAttribute('data-book', JSON.stringify(book));
             bookCard.innerHTML = `
                 <div class="bg-gray-200 h-32 rounded-md mb-2 overflow-hidden">
                     ${thumbnailHTML}
@@ -253,10 +255,11 @@
 
         const modal = document.getElementById('modal');
         function showModal(bookData) {
-            // UPDATED: Set modal thumbnail source
             const modalThumbnail = document.getElementById('modal-thumbnail');
-            if (bookData.thumbnailUrl) {
-                modalThumbnail.src = bookData.thumbnailUrl;
+            const secureThumbnailUrl = bookData.thumbnailUrl ? bookData.thumbnailUrl.replace('http://', 'https://') : '';
+
+            if (secureThumbnailUrl) {
+                modalThumbnail.src = secureThumbnailUrl;
                 modalThumbnail.style.display = 'block';
             } else {
                 modalThumbnail.style.display = 'none';
