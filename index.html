@@ -154,7 +154,6 @@
         const loginBtn = document.getElementById('login-btn');
         const loginError = document.getElementById('login-error');
         const logoutBtn = document.getElementById('logout-btn');
-        // ... (other app elements)
         const libraryPage = document.getElementById('library-page');
         const profilePage = document.getElementById('profile-page');
         const libraryContent = document.getElementById('library-content');
@@ -194,13 +193,13 @@
         async function checkLoginState() {
             const loggedInRollNo = localStorage.getItem('loggedInStudentRollNo');
             if (loggedInRollNo) {
-                const userDoc = await getDoc(doc(db, "students", loggedInRollNo));
-                if (userDoc.exists()) {
-                    currentUser = userDoc.data();
-                    showApp();
-                } else {
-                    showLogin(); // User data was deleted
-                }
+                try {
+                    const userDoc = await getDoc(doc(db, "students", loggedInRollNo));
+                    if (userDoc.exists()) {
+                        currentUser = userDoc.data();
+                        showApp();
+                    } else { showLogin(); }
+                } catch (e) { showLogin(); }
             } else {
                 showLogin();
             }
@@ -232,7 +231,6 @@
 
         logoutBtn.addEventListener('click', showLogin);
         
-        // --- Navigation Logic ---
         function showPage(page) {
             libraryPage.classList.toggle('hidden', page !== 'library');
             profilePage.classList.toggle('hidden', page !== 'profile');
@@ -251,7 +249,20 @@
             if (!currentUser) return;
             profileName.textContent = currentUser.name;
             profileRollNo.textContent = `Student ID: ${currentUser.rollNo}`;
-            profileAvatar.src = currentUser.profileImageUrl || `https://placehold.co/100x100/E2E8F0/4A5568?text=${currentUser.name.charAt(0)}`;
+            
+            // --- THIS IS THE FIX ---
+            // This code checks if the URL is valid before trying to use it.
+            // If it's invalid (like a Google search link), it uses a default placeholder.
+            const placeholderAvatar = `https://placehold.co/100x100/E2E8F0/4A5568?text=${currentUser.name.charAt(0)}`;
+            const imageUrl = currentUser.profileImageUrl;
+
+            if (imageUrl && (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) && !imageUrl.includes('google.com/search')) {
+                profileAvatar.src = imageUrl.replace('http://', 'https://');
+            } else {
+                profileAvatar.src = placeholderAvatar;
+            }
+            // --- END OF FIX ---
+
             generateQRCode();
         }
 
