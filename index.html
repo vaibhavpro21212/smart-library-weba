@@ -25,70 +25,100 @@
     </style>
 </head>
 <body class="bg-gray-50">
-    <div class="flex flex-col h-screen justify-between">
-        <main class="overflow-y-auto pb-20">
-            <!-- Library Page -->
-            <div id="library-page">
-                <header class="bg-white shadow-sm sticky top-0 z-20">
-                    <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
-                        <h1 id="page-title" class="text-2xl font-bold text-gray-900 flex items-center"></h1>
-                        <div id="search-container" class="mt-4">
-                            <input type="text" id="search-input" placeholder="Search all books..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
-                        </div>
-                    </div>
-                </header>
-                <div id="library-content" class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 px-4">
-                    <div id="loading-state" class="flex justify-center items-center py-20">
-                        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Profile Page (Initially hidden) -->
-            <div id="profile-page" class="hidden">
-                 <header class="bg-white shadow-sm sticky top-0 z-20">
-                    <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
-                        <h1 class="text-2xl font-bold text-gray-900 flex items-center">
-                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
-                            My Profile
-                        </h1>
-                    </div>
-                </header>
-                <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 px-4">
-                    <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center">
-                        <img class="h-24 w-24 rounded-full object-cover mb-4 shadow-md" src="https://placehold.co/100x100/E2E8F0/4A5568?text=AV" alt="User Avatar">
-                        <h2 class="text-xl font-bold text-gray-800">Alex Doe</h2>
-                        <p class="text-gray-500">Student ID: STUDENT12345</p>
-                        <div class="mt-6 border-t pt-6 w-full flex flex-col items-center">
-                            <h3 class="text-lg font-semibold text-gray-700 mb-2">Library Card</h3>
-                            <div class="bg-gray-100 p-4 rounded-lg">
-                                <canvas id="qr-code-canvas"></canvas>
-                            </div>
-                            <p class="text-xs text-gray-400 mt-2">Scan this QR code to issue books.</p>
-                        </div>
-                    </div>
+    <!-- Login Page (Initially Visible) -->
+    <div id="login-page" class="flex flex-col items-center justify-center h-screen bg-gray-100 p-4">
+        <div class="w-full max-w-sm bg-white p-8 rounded-2xl shadow-lg">
+            <div class="text-center mb-6">
+                 <h1 class="text-3xl font-bold text-gray-900 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-2 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                    Smart Library
+                </h1>
+                <p class="text-gray-500 mt-2">Please sign in to continue.</p>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <label for="roll-no-input" class="block text-sm font-medium text-gray-700">University Roll No.</label>
+                    <input type="text" id="roll-no-input" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500" placeholder="e.g., STUDENT12345">
+                </div>
+                <div>
+                    <label for="password-input" class="block text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" id="password-input" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500" placeholder="••••••••">
                 </div>
             </div>
-        </main>
-        
-        <!-- Bottom Navigation -->
-        <nav class="bg-white shadow-t w-full fixed bottom-0 border-t">
-            <div class="max-w-7xl mx-auto flex justify-around py-2 px-4">
-                <button id="nav-library" class="nav-item flex flex-col items-center text-gray-500 active">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
-                    <span class="text-xs font-medium">Library</span>
-                </button>
-                <button id="nav-profile" class="nav-item flex flex-col items-center text-gray-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
-                    <span class="text-xs font-medium">Profile</span>
-                </button>
-            </div>
-        </nav>
+            <p id="login-error" class="text-red-500 text-sm mt-2 text-center h-4"></p>
+            <button id="login-btn" class="mt-4 w-full bg-indigo-600 text-white font-bold py-2.5 px-4 rounded-lg hover:bg-indigo-700 transition">Login</button>
+        </div>
     </div>
+    
+    <!-- Main App Content (Initially Hidden) -->
+    <div id="main-app" class="hidden h-screen">
+        <div class="flex flex-col h-full justify-between">
+            <main class="overflow-y-auto pb-20">
+                <!-- Library Page -->
+                <div id="library-page">
+                     <header class="bg-white shadow-sm sticky top-0 z-20">
+                        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
+                            <h1 id="page-title" class="text-2xl font-bold text-gray-900 flex items-center"></h1>
+                            <div id="search-container" class="mt-4">
+                                <input type="text" id="search-input" placeholder="Search all books..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                            </div>
+                        </div>
+                    </header>
+                    <div id="library-content" class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 px-4">
+                        <div id="loading-state" class="flex justify-center items-center py-20">
+                            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+                        </div>
+                    </div>
+                </div>
 
-    <!-- Book Details Modal -->
+                <!-- Profile Page -->
+                <div id="profile-page" class="hidden">
+                     <header class="bg-white shadow-sm sticky top-0 z-20">
+                        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+                            <h1 class="text-2xl font-bold text-gray-900 flex items-center">
+                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                                My Profile
+                            </h1>
+                             <button id="logout-btn" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">Logout</button>
+                        </div>
+                    </header>
+                    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 px-4">
+                        <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center">
+                            <img id="profile-avatar" class="h-24 w-24 rounded-full object-cover mb-4 shadow-md" src="" alt="User Avatar">
+                            <h2 id="profile-name" class="text-xl font-bold text-gray-800"></h2>
+                            <p id="profile-rollno" class="text-gray-500"></p>
+                            <div class="mt-6 border-t pt-6 w-full flex flex-col items-center">
+                                <h3 class="text-lg font-semibold text-gray-700 mb-2">Library Card</h3>
+                                <div class="bg-gray-100 p-4 rounded-lg">
+                                    <canvas id="qr-code-canvas"></canvas>
+                                </div>
+                                <p class="text-xs text-gray-400 mt-2">Scan this QR code to issue books.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            
+            <!-- Bottom Navigation -->
+            <nav class="bg-white shadow-t w-full fixed bottom-0 border-t">
+                <div class="max-w-7xl mx-auto flex justify-around py-2 px-4">
+                    <button id="nav-library" class="nav-item flex flex-col items-center text-gray-500 active">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                        <span class="text-xs font-medium">Library</span>
+                    </button>
+                    <button id="nav-profile" class="nav-item flex flex-col items-center text-gray-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                        <span class="text-xs font-medium">Profile</span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </div>
+    
+    <!-- Book Details Modal (unchanged) -->
     <div id="modal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 opacity-0 pointer-events-none scale-95 z-50">
-        <div id="modal-content" class="bg-white w-full max-w-sm rounded-2xl shadow-xl p-6 relative">
+       <div id="modal-content" class="bg-white w-full max-w-sm rounded-2xl shadow-xl p-6 relative">
             <button id="close-modal" class="absolute top-3 right-3 text-gray-400 hover:text-gray-700"><svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
             <img id="modal-thumbnail" src="" class="w-24 h-36 object-cover rounded-md float-left mr-4 mb-2 shadow-lg" alt="Book Cover">
             <h2 id="modal-title" class="text-2xl font-bold text-gray-800 mb-1">Book Title</h2>
@@ -100,7 +130,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, collection, onSnapshot, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyDB9oY6IJciaFp1THAJ0VeI7rpSrefj5sk",
@@ -114,7 +144,17 @@
         let db;
         let allShelves = [];
         let allBooks = [];
+        let currentUser = null;
 
+        // --- DOM Elements ---
+        const loginPage = document.getElementById('login-page');
+        const mainApp = document.getElementById('main-app');
+        const rollNoInput = document.getElementById('roll-no-input');
+        const passwordInput = document.getElementById('password-input');
+        const loginBtn = document.getElementById('login-btn');
+        const loginError = document.getElementById('login-error');
+        const logoutBtn = document.getElementById('logout-btn');
+        // ... (other app elements)
         const libraryPage = document.getElementById('library-page');
         const profilePage = document.getElementById('profile-page');
         const libraryContent = document.getElementById('library-content');
@@ -124,15 +164,75 @@
         const searchContainer = document.getElementById('search-container');
         const navLibrary = document.getElementById('nav-library');
         const navProfile = document.getElementById('nav-profile');
+        const profileAvatar = document.getElementById('profile-avatar');
+        const profileName = document.getElementById('profile-name');
+        const profileRollNo = document.getElementById('profile-rollno');
 
+        // --- App Initialization ---
         try {
             const app = initializeApp(firebaseConfig);
             db = getFirestore(app);
-            listenForLibraryChanges();
+            checkLoginState();
         } catch (e) {
-            libraryContent.innerHTML = `<p class="text-red-500 text-center py-10">Error: Could not connect to the database.</p>`;
+            document.body.innerHTML = `<p class="text-red-500 text-center py-10">Error: Could not initialize app.</p>`;
         }
+
+        function showApp() {
+            loginPage.classList.add('hidden');
+            mainApp.classList.remove('hidden');
+            listenForLibraryChanges();
+            showPage('library');
+        }
+
+        function showLogin() {
+            mainApp.classList.add('hidden');
+            loginPage.classList.remove('hidden');
+            currentUser = null;
+            localStorage.removeItem('loggedInStudentRollNo');
+        }
+
+        async function checkLoginState() {
+            const loggedInRollNo = localStorage.getItem('loggedInStudentRollNo');
+            if (loggedInRollNo) {
+                const userDoc = await getDoc(doc(db, "students", loggedInRollNo));
+                if (userDoc.exists()) {
+                    currentUser = userDoc.data();
+                    showApp();
+                } else {
+                    showLogin(); // User data was deleted
+                }
+            } else {
+                showLogin();
+            }
+        }
+
+        loginBtn.addEventListener('click', async () => {
+            const rollNo = rollNoInput.value.trim();
+            const password = passwordInput.value.trim();
+            loginError.textContent = '';
+            if (!rollNo || !password) {
+                loginError.textContent = 'Please enter Roll No. and Password.';
+                return;
+            }
+            try {
+                const studentRef = doc(db, "students", rollNo);
+                const studentSnap = await getDoc(studentRef);
+                if (studentSnap.exists() && studentSnap.data().password === password) {
+                    currentUser = studentSnap.data();
+                    localStorage.setItem('loggedInStudentRollNo', currentUser.rollNo);
+                    showApp();
+                } else {
+                    loginError.textContent = 'Invalid Roll No. or Password.';
+                }
+            } catch (err) {
+                loginError.textContent = 'An error occurred. Please try again.';
+                console.error(err);
+            }
+        });
+
+        logoutBtn.addEventListener('click', showLogin);
         
+        // --- Navigation Logic ---
         function showPage(page) {
             libraryPage.classList.toggle('hidden', page !== 'library');
             profilePage.classList.toggle('hidden', page !== 'profile');
@@ -144,58 +244,48 @@
         navLibrary.addEventListener('click', () => showPage('library'));
         navProfile.addEventListener('click', () => {
             showPage('profile');
-            generateQRCode();
+            renderProfile();
         });
 
+        function renderProfile() {
+            if (!currentUser) return;
+            profileName.textContent = currentUser.name;
+            profileRollNo.textContent = `Student ID: ${currentUser.rollNo}`;
+            profileAvatar.src = currentUser.profileImageUrl || `https://placehold.co/100x100/E2E8F0/4A5568?text=${currentUser.name.charAt(0)}`;
+            generateQRCode();
+        }
+
+        // --- All other library logic remains the same ---
         function listenForLibraryChanges() {
-            if (!db) return;
+             if (!db) return;
             onSnapshot(collection(db, "shelves"), (snapshot) => {
                 allShelves = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })).sort((a, b) => a.name.localeCompare(b.name));
                 if (libraryContent.dataset.viewing === 'shelves') renderShelfList();
             });
             onSnapshot(collection(db, "books"), (snapshot) => {
                 allBooks = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                if (libraryContent.dataset.viewing === 'books') {
-                    renderBooksForShelf(libraryContent.dataset.shelfId);
-                } else if (libraryContent.dataset.viewing === 'search') {
-                    renderSearchResults(allBooks.filter(book => book.title.toLowerCase().includes(searchInput.value.toLowerCase()) || book.author.toLowerCase().includes(searchInput.value.toLowerCase())));
-                } else {
-                     renderShelfList();
-                }
+                const currentView = libraryContent.dataset.viewing;
+                if (currentView === 'books') renderBooksForShelf(libraryContent.dataset.shelfId);
+                else if (currentView === 'search') renderSearchResults(allBooks.filter(book => book.title.toLowerCase().includes(searchInput.value.toLowerCase()) || book.author.toLowerCase().includes(searchInput.value.toLowerCase())));
+                else renderShelfList();
             });
         }
-        
         function createBookCard(book) {
             const placeholderIcon = `<svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>`;
-            
-            // --- THIS IS THE FIX ---
-            // It ensures the URL is HTTPS before trying to display it.
             const secureThumbnailUrl = book.thumbnailUrl ? book.thumbnailUrl.replace('http://', 'https://') : '';
-            
-            const thumbnailHTML = secureThumbnailUrl 
-                ? `<img src="${secureThumbnailUrl}" alt="${book.title}" class="w-full h-full object-cover">`
-                : `<div class="w-full h-full flex items-center justify-center bg-gray-200">${placeholderIcon}</div>`;
-
+            const thumbnailHTML = secureThumbnailUrl ? `<img src="${secureThumbnailUrl}" alt="${book.title}" class="w-full h-full object-cover">` : `<div class="w-full h-full flex items-center justify-center bg-gray-200">${placeholderIcon}</div>`;
             const bookCard = document.createElement('div');
             bookCard.className = 'book-card bg-white rounded-lg p-3 cursor-pointer';
             bookCard.setAttribute('data-book', JSON.stringify(book));
-            bookCard.innerHTML = `
-                <div class="bg-gray-200 h-32 rounded-md mb-2 overflow-hidden">
-                    ${thumbnailHTML}
-                </div>
-                <h3 class="font-semibold text-sm text-gray-800 truncate">${book.title}</h3>
-                <p class="text-xs text-gray-500 truncate">${book.author}</p>
-            `;
+            bookCard.innerHTML = `<div class="bg-gray-200 h-32 rounded-md mb-2 overflow-hidden">${thumbnailHTML}</div><h3 class="font-semibold text-sm text-gray-800 truncate">${book.title}</h3><p class="text-xs text-gray-500 truncate">${book.author}</p>`;
             bookCard.addEventListener('click', () => showModal(book));
             return bookCard;
         }
-
         function renderShelfList() {
             loadingState.style.display = 'none';
             libraryContent.innerHTML = '';
             pageTitle.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg> Library Shelves`;
             libraryContent.dataset.viewing = 'shelves';
-
             const shelfListContainer = document.createElement('div');
             shelfListContainer.className = 'space-y-3';
             allShelves.forEach(shelf => {
@@ -207,20 +297,17 @@
             });
             libraryContent.appendChild(shelfListContainer);
         }
-
         function renderBooksForShelf(shelfId) {
             const shelf = allShelves.find(s => s.id === shelfId);
             const booksOnShelf = allBooks.filter(b => b.shelfId === shelfId);
             libraryContent.innerHTML = '';
             libraryContent.dataset.viewing = 'books';
             libraryContent.dataset.shelfId = shelfId;
-
             const backButton = document.createElement('button');
             backButton.className = 'text-indigo-600 font-semibold mb-4 flex items-center';
             backButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg> Back to Shelves`;
             backButton.addEventListener('click', renderShelfList);
             libraryContent.appendChild(backButton);
-            
             pageTitle.innerText = shelf.name;
             const bookGrid = document.createElement('div');
             bookGrid.className = 'grid grid-cols-2 md:grid-cols-3 gap-4';
@@ -228,14 +315,12 @@
             else bookGrid.innerHTML = `<p class="text-gray-500 col-span-full text-center">No books found on this shelf.</p>`;
             libraryContent.appendChild(bookGrid);
         }
-        
         searchInput.addEventListener('input', (e) => {
             const searchTerm = e.target.value.toLowerCase();
             if (!searchTerm) { renderShelfList(); return; }
             const filteredBooks = allBooks.filter(book => book.title.toLowerCase().includes(searchTerm) || book.author.toLowerCase().includes(searchTerm));
             renderSearchResults(filteredBooks);
         });
-        
         function renderSearchResults(books) {
             libraryContent.innerHTML = '';
             libraryContent.dataset.viewing = 'search';
@@ -246,25 +331,17 @@
             else bookGrid.innerHTML = `<p class="text-gray-500 col-span-full text-center">No books found for your search.</p>`;
             libraryContent.appendChild(bookGrid);
         }
-
         function generateQRCode() {
+            if(!currentUser) return;
             const canvas = document.getElementById('qr-code-canvas');
-            const studentId = 'STUDENT12345';
-            QRCode.toCanvas(canvas, studentId, { width: 160 }, function (error) { if (error) console.error(error); });
+            QRCode.toCanvas(canvas, currentUser.rollNo, { width: 160 }, function (error) { if (error) console.error(error); });
         }
-
         const modal = document.getElementById('modal');
         function showModal(bookData) {
             const modalThumbnail = document.getElementById('modal-thumbnail');
             const secureThumbnailUrl = bookData.thumbnailUrl ? bookData.thumbnailUrl.replace('http://', 'https://') : '';
-
-            if (secureThumbnailUrl) {
-                modalThumbnail.src = secureThumbnailUrl;
-                modalThumbnail.style.display = 'block';
-            } else {
-                modalThumbnail.style.display = 'none';
-            }
-
+            if (secureThumbnailUrl) { modalThumbnail.src = secureThumbnailUrl; modalThumbnail.style.display = 'block'; } 
+            else { modalThumbnail.style.display = 'none'; }
             document.getElementById('modal-title').innerText = bookData.title;
             document.getElementById('modal-author').innerText = `by ${bookData.author}`;
             document.getElementById('modal-description').innerText = bookData.description || 'No description available.';
@@ -287,6 +364,7 @@
         });
         document.getElementById('close-modal').addEventListener('click', closeModal);
         modal.addEventListener('click', (e) => { if (e.target.id === 'modal') { closeModal(); } });
+
     </script>
 </body>
 </html>
