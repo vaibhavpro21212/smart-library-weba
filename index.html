@@ -22,7 +22,6 @@
 </head>
 <body class="bg-gray-50">
 
-    <!-- Login Page -->
     <div id="login-page" class="flex flex-col items-center justify-center h-screen bg-gray-100 p-4">
         <div class="w-full max-w-sm bg-white p-8 rounded-2xl shadow-lg">
             <div class="text-center mb-6">
@@ -53,7 +52,6 @@
         </div>
     </div>
     
-    <!-- Main App Content -->
     <div id="main-app" class="hidden h-screen">
         <div class="flex flex-col h-full justify-between">
             <main class="overflow-y-auto pb-20">
@@ -78,11 +76,11 @@
                     <div id="wishlist-content" class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 px-4"></div>
                 </div>
 
-                <div id="demands-page" class="hidden">
+                 <div id="demands-page" class="hidden">
                     <header class="bg-white shadow-sm sticky top-0 z-20">
                         <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8"><h1 class="text-2xl font-bold text-gray-900 flex items-center">
                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-                            Book Demands</h1></div>
+                           Book Demands</h1></div>
                     </header>
                     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 px-4 space-y-6">
                         <div class="bg-white p-4 rounded-lg shadow">
@@ -97,12 +95,27 @@
                     </div>
                 </div>
 
+                <div id="history-page" class="hidden">
+                    <header class="bg-white shadow-sm sticky top-0 z-20">
+                        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
+                            <h1 class="text-2xl font-bold text-gray-900 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                Borrowing History
+                            </h1>
+                        </div>
+                    </header>
+                    <div id="history-content" class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 px-4 space-y-8">
+                        </div>
+                </div>
+
                 <div id="profile-page" class="hidden">
                      <header class="bg-white shadow-sm sticky top-0 z-20">
                         <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
                             <h1 class="text-2xl font-bold text-gray-900 flex items-center">
                                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
-                                My Profile</h1>
+                                 My Profile</h1>
                              <button id="logout-btn" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">Logout</button>
                         </div>
                     </header>
@@ -152,6 +165,12 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
                         <span class="text-xs font-medium">Demands</span>
                     </button>
+                    <button id="nav-history" class="nav-item flex flex-col items-center text-gray-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span class="text-xs font-medium">History</span>
+                    </button>
                     <button id="nav-profile" class="nav-item flex flex-col items-center text-gray-500">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
                         <span class="text-xs font-medium">Profile</span>
@@ -161,7 +180,6 @@
         </div>
     </div>
     
-    <!-- Modals -->
     <div id="modal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 opacity-0 pointer-events-none scale-95 z-50">
        <div id="modal-content" class="bg-white w-full max-w-sm rounded-2xl shadow-xl p-6 relative">
             <button id="close-modal" class="absolute top-3 right-3 text-gray-400 hover:text-gray-700"><svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
@@ -177,7 +195,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, onSnapshot, doc, getDoc, setDoc, deleteDoc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getFirestore, collection, onSnapshot, doc, getDoc, setDoc, deleteDoc, updateDoc, increment, query, where, orderBy } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
         // --- Firebase Config (Your details) ---
         const firebaseConfig = {
@@ -191,18 +209,20 @@
         
         // --- State Variables ---
         let db;
-        let allShelves = [], allBooks = [], allDemands = [], myWishlistBooks = [];
+        let allShelves = [], allBooks = [], allDemands = [], myWishlistBooks = [], myHistory = [];
         let currentUser = null;
-        let listeners = { library: null, wishlist: null, demands: null };
+        let listeners = { library: null, wishlist: null, demands: null, history: null };
 
-        // --- DOM Element Selectors (COMPLETE AND CORRECTED) ---
+        // --- DOM Element Selectors ---
         const pages = {
             login: document.getElementById('login-page'), main: document.getElementById('main-app'), library: document.getElementById('library-page'),
-            wishlist: document.getElementById('wishlist-page'), demands: document.getElementById('demands-page'), profile: document.getElementById('profile-page')
+            wishlist: document.getElementById('wishlist-page'), demands: document.getElementById('demands-page'), 
+            history: document.getElementById('history-page'), profile: document.getElementById('profile-page')
         };
         const navItems = {
             library: document.getElementById('nav-library'), wishlist: document.getElementById('nav-wishlist'),
-            demands: document.getElementById('nav-demands'), profile: document.getElementById('nav-profile')
+            demands: document.getElementById('nav-demands'), history: document.getElementById('nav-history'), 
+            profile: document.getElementById('nav-profile')
         };
         const dom = {
             rollNoInput: document.getElementById('roll-no-input'), passwordInput: document.getElementById('password-input'),
@@ -210,12 +230,13 @@
             loginSpinner: document.getElementById('login-spinner'), loginError: document.getElementById('login-error'),
             logoutBtn: document.getElementById('logout-btn'), forgotPasswordLink: document.getElementById('forgot-password-link'),
             libraryContent: document.getElementById('library-content'), wishlistContent: document.getElementById('wishlist-content'),
-            demandsContent: document.getElementById('demands-content'), pageTitle: document.getElementById('page-title'),
-            searchInput: document.getElementById('search-input'), profileAvatar: document.getElementById('profile-avatar'),
-            profileName: document.getElementById('profile-name'), profileRollNo: document.getElementById('profile-rollno'),
-            qrCodeCanvas: document.getElementById('qr-code-canvas'), demandTitleInput: document.getElementById('demand-title'),
-            demandAuthorInput: document.getElementById('demand-author'), demandSubmitBtn: document.getElementById('demand-submit-btn'),
-            toast: document.getElementById('toast'), modal: document.getElementById('modal'), modalTitle: document.getElementById('modal-title'),
+            demandsContent: document.getElementById('demands-content'), historyContent: document.getElementById('history-content'),
+            pageTitle: document.getElementById('page-title'), searchInput: document.getElementById('search-input'), 
+            profileAvatar: document.getElementById('profile-avatar'), profileName: document.getElementById('profile-name'), 
+            profileRollNo: document.getElementById('profile-rollno'), qrCodeCanvas: document.getElementById('qr-code-canvas'),
+            demandTitleInput: document.getElementById('demand-title'), demandAuthorInput: document.getElementById('demand-author'),
+            demandSubmitBtn: document.getElementById('demand-submit-btn'), toast: document.getElementById('toast'),
+            modal: document.getElementById('modal'), modalTitle: document.getElementById('modal-title'),
             modalAuthor: document.getElementById('modal-author'), modalStatus: document.getElementById('modal-status'),
             modalDescription: document.getElementById('modal-description'), modalThumbnail: document.getElementById('modal-thumbnail'),
             wishlistBtn: document.getElementById('wishlist-btn'), closeModalBtn: document.getElementById('close-modal'),
@@ -238,7 +259,7 @@
             pages.main.classList.add('hidden'); pages.login.classList.remove('hidden'); currentUser = null;
             localStorage.removeItem('loggedInStudentRollNo');
             Object.values(listeners).forEach(unsubscribe => unsubscribe && unsubscribe());
-            listeners = { library: null, wishlist: null, demands: null };
+            listeners = { library: null, wishlist: null, demands: null, history: null };
         }
 
         async function checkLoginState() {
@@ -360,6 +381,7 @@
                 case 'library': if (!listeners.library) listenForLibraryData(); break;
                 case 'wishlist': if (!listeners.wishlist) listenForWishlistData(); else renderWishlistPage(); break;
                 case 'demands': if (!listeners.demands) listenForDemandsData(); else renderDemandsPage(); break;
+                case 'history': if (!listeners.history) listenForHistoryData(); else renderHistoryPage(); break;
                 case 'profile': renderProfile(); break;
             }
         }
@@ -387,6 +409,18 @@
             listeners.demands = onSnapshot(collection(db, "demands"), s => { allDemands = s.docs.map(d=>({id:d.id,...d.data()})); if(pages.demands.offsetParent) renderDemandsPage(); });
         }
 
+        function listenForHistoryData() {
+            if (!db || listeners.history || !currentUser) return;
+            dom.historyContent.innerHTML = `<div class="flex justify-center items-center py-20"><div class="spinner animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div></div>`;
+            
+            const q = query(collection(db, "borrowingHistory"), where("studentRollNo", "==", currentUser.rollNo), orderBy("issuedDate", "desc"));
+
+            listeners.history = onSnapshot(q, snapshot => {
+                myHistory = snapshot.docs.map(doc => doc.data());
+                if (pages.history.offsetParent) renderHistoryPage();
+            }, e => console.error("History listener failed:", e));
+        }
+
         function renderWishlistPage() {
             dom.wishlistContent.innerHTML = '';
             if (myWishlistBooks.length === 0) { dom.wishlistContent.innerHTML = `<p class="text-center text-gray-500 py-10">Your wishlist is empty.</p>`; return; }
@@ -412,6 +446,69 @@
             });
         }
         
+        function renderHistoryPage() {
+            dom.historyContent.innerHTML = '';
+            
+            const currentlyBorrowed = myHistory.filter(item => item.status === 'borrowed');
+            const returnedHistory = myHistory.filter(item => item.status === 'returned');
+
+            // Section for Currently Borrowed Books
+            let currentHtml = `<div><h2 class="text-xl font-semibold mb-3">Currently Borrowed</h2>`;
+            if (currentlyBorrowed.length === 0) {
+                currentHtml += `<div class="bg-white rounded-lg p-4 text-center text-gray-500 shadow">You have no books checked out.</div>`;
+            } else {
+                currentHtml += `<div class="space-y-3">${currentlyBorrowed.map(createHistoryCard).join('')}</div>`;
+            }
+            currentHtml += `</div>`;
+
+            // Section for Returned Books History
+            let returnedHtml = `<div><h2 class="text-xl font-semibold mb-3">Returned Books</h2>`;
+            if (returnedHistory.length === 0) {
+                returnedHtml += `<div class="bg-white rounded-lg p-4 text-center text-gray-500 shadow">Your borrowing history is empty.</div>`;
+            } else {
+                returnedHtml += `<div class="space-y-3">${returnedHistory.map(createHistoryCard).join('')}</div>`;
+            }
+            returnedHtml += `</div>`;
+
+            dom.historyContent.innerHTML = currentHtml + returnedHtml;
+        }
+
+        function createHistoryCard(historyItem) {
+            const placeholderIcon = `<div class="w-full h-full flex items-center justify-center bg-gray-200 rounded-md"><svg class="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg></div>`;
+            const secureThumbnailUrl = historyItem.thumbnailUrl ? historyItem.thumbnailUrl.replace('http://', 'https://') : '';
+            const thumbnailHTML = secureThumbnailUrl ? `<img src="${secureThumbnailUrl}" class="w-12 h-16 object-cover rounded-md shadow-sm">` : `<div class="w-12 h-16">${placeholderIcon}</div>`;
+            
+            let dateText = '';
+            
+            if (historyItem.status === 'borrowed' && historyItem.dueDate) {
+                const dueDate = new Date(historyItem.dueDate);
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+
+                const isOverdue = dueDate < today;
+                const dateString = dueDate.toLocaleDateString();
+
+                if (isOverdue) {
+                    dateText = `<p class="text-xs font-semibold text-red-600">Overdue! Due on: ${dateString}</p>`;
+                } else {
+                    dateText = `<p class="text-xs text-gray-500">Due on: ${dateString}</p>`;
+                }
+            } else if (historyItem.returnDate) {
+                const returnDateString = new Date(historyItem.returnDate).toLocaleDateString();
+                dateText = `<p class="text-xs text-gray-500">Returned on: ${returnDateString}</p>`;
+            }
+
+            return `
+                <div class="card bg-white rounded-lg p-3 flex items-center space-x-4">
+                    ${thumbnailHTML}
+                    <div class="flex-1">
+                        <p class="font-semibold text-gray-800">${historyItem.bookTitle}</p>
+                        ${dateText}
+                    </div>
+                </div>
+            `;
+        }
+
         dom.demandSubmitBtn.addEventListener('click', async () => {
             const title = dom.demandTitleInput.value.trim();
             const author = dom.demandAuthorInput.value.trim();
@@ -547,4 +644,3 @@
     </script>
 </body>
 </html>
-
