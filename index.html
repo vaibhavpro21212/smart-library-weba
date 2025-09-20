@@ -298,7 +298,7 @@
         const navItems = {
             library: document.getElementById('nav-library'), wishlist: document.getElementById('nav-wishlist'),
             demands: document.getElementById('nav-demands'), academics: document.getElementById('nav-academics'),
-            history: document.getElementById('nav-history'), profile: document.getElementById('nav-profile')
+            profile: document.getElementById('nav-profile')
         };
         const dom = {
             rollNoInput: document.getElementById('roll-no-input'), passwordInput: document.getElementById('password-input'),
@@ -835,7 +835,7 @@
             card.className = "card bg-white rounded-lg p-4 block hover:shadow-lg transition";
             let subtitle = paperData.author ? `<p class="text-sm text-gray-500">by ${paperData.author}</p>` : `<p class="text-sm text-gray-500">${paperData.department} | Year: ${paperData.year} | Sem: ${paperData.semester}</p>`;
             card.innerHTML = `<div class="flex items-center justify-between"><div><p class="font-semibold text-indigo-700">${paperData.title || paperData.courseName}</p>${subtitle}</div><svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg></div>`;
-            return card;
+            return card.cloneNode(true); // Use cloneNode to avoid issues
         }
         dom.academicsResearchCard.addEventListener('click', () => showPage('research'));
         dom.academicsQpapersCard.addEventListener('click', () => showPage('qpapers'));
