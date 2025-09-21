@@ -63,7 +63,13 @@
                 <div id="library-page">
                      <header class="bg-white shadow-sm sticky top-0 z-20">
                         <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
-                            <h1 id="page-title" class="text-2xl font-bold text-gray-900 flex items-center"></h1>
+                            <div class="flex items-center justify-between">
+                                <h1 id="page-title" class="text-2xl font-bold text-gray-900 flex items-center"></h1>
+                                <button id="view-history-btn" class="text-sm font-medium text-indigo-600 hover:text-indigo-800 flex items-center flex-shrink-0">
+                                    <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                    History
+                                </button>
+                            </div>
                             <div id="search-container" class="mt-4">
                                 <input type="text" id="search-input" placeholder="Search all books..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
                             </div>
@@ -161,17 +167,6 @@
                         <div id="qpapers-content" class="space-y-3"></div>
                     </div>
                 </div>
-                <div id="history-page" class="hidden">
-                     <header class="bg-white shadow-sm sticky top-0 z-20">
-                        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8"><h1 class="text-2xl font-bold text-gray-900 flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            Borrowing History
-                        </h1></div>
-                    </header>
-                    <div id="history-content" class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 px-4 space-y-8"></div>
-                </div>
                 <div id="profile-page" class="hidden">
                      <header class="bg-white shadow-sm sticky top-0 z-20">
                         <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
@@ -208,6 +203,16 @@
                             <button id="change-password-btn" class="mt-4 w-full bg-indigo-600 text-white font-bold py-2.5 px-4 rounded-lg hover:bg-indigo-700">Update Password</button>
                         </div>
                     </div>
+                </div>
+                <!-- NEW: All Reviews Page -->
+                <div id="reviews-page" class="hidden">
+                    <header class="bg-white shadow-sm sticky top-0 z-20">
+                        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
+                           <button id="back-to-modal-btn" class="text-indigo-600 font-semibold mb-4 flex items-center"><svg class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg> Back to Book Details</button>
+                           <h1 id="reviews-page-title" class="text-2xl font-bold text-gray-900 flex items-center">All Reviews</h1>
+                        </div>
+                    </header>
+                    <div id="reviews-content" class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 px-4 space-y-4"></div>
                 </div>
             </main>
             
@@ -254,7 +259,10 @@
                 <button id="wishlist-btn" class="w-full text-white font-bold py-2 rounded-lg mt-4 transition"></button>
             </div>
             <div class="px-6 border-t border-b overflow-y-auto flex-1">
-                <h3 class="text-lg font-semibold text-gray-800 pt-4 pb-2 sticky top-0 bg-white">Reviews</h3>
+                <div class="flex justify-between items-center pt-4 pb-2 sticky top-0 bg-white">
+                    <h3 class="text-lg font-semibold text-gray-800">Reviews</h3>
+                    <button id="see-all-reviews-btn" class="text-sm font-medium text-indigo-600 hover:text-indigo-800 hidden">See all</button>
+                </div>
                 <div id="modal-reviews-list" class="space-y-4 pb-4"></div>
             </div>
             <div class="p-6 bg-gray-50 rounded-b-2xl">
@@ -293,7 +301,7 @@
             wishlist: document.getElementById('wishlist-page'), demands: document.getElementById('demands-page'), 
             academics: document.getElementById('academics-page'), research: document.getElementById('research-page'),
             qpapers: document.getElementById('qpapers-page'), history: document.getElementById('history-page'),
-            profile: document.getElementById('profile-page')
+            profile: document.getElementById('profile-page'), reviews: document.getElementById('reviews-page')
         };
         const navItems = {
             library: document.getElementById('nav-library'), wishlist: document.getElementById('nav-wishlist'),
@@ -329,6 +337,11 @@
             academicsQpapersCard: document.getElementById('academics-qpapers-card'),
             backToAcademicsBtn1: document.getElementById('back-to-academics-btn-1'),
             backToAcademicsBtn2: document.getElementById('back-to-academics-btn-2'),
+            reviewsPageTitle: document.getElementById('reviews-page-title'),
+            reviewsContent: document.getElementById('reviews-content'),
+            seeAllReviewsBtn: document.getElementById('see-all-reviews-btn'),
+            backToModalBtn: document.getElementById('back-to-modal-btn'),
+            viewHistoryBtn: document.getElementById('view-history-btn'),
         };
 
         // --- App Initialization ---
@@ -412,14 +425,18 @@
             }
             Object.values(navItems).forEach(n => n.classList.remove('active'));
             if(navItems[pageId]) navItems[pageId].classList.add('active');
+            
+            // Hide/show header elements based on page
+            const libraryHeaderElements = [dom.viewHistoryBtn, dom.searchContainer, dom.pageTitle];
+            libraryHeaderElements.forEach(el => el.classList.toggle('hidden', pageId !== 'library'));
+
             switch(pageId) {
-                case 'library': if (!listeners.library) listenForLibraryData(); break;
+                case 'library': if (!listeners.library) listenForLibraryData(); else renderShelfList(); break;
                 case 'wishlist': if (!listeners.wishlist) listenForWishlistData(); else renderWishlistPage(); break;
                 case 'demands': if (!listeners.demands) listenForDemandsData(); else renderDemandsPage(); break;
                 case 'academics': break;
                 case 'research': if(!listeners.research) listenForResearchPapers(); else renderResearchPapers(dom.researchSearchInput.value); break;
                 case 'qpapers': populateYearFilter(); dom.filterQpapersBtn.click(); break;
-                case 'history': if (!listeners.history) listenForHistoryData(); else renderHistoryPage(); break;
                 case 'profile': renderProfile(); break;
             }
         }
@@ -429,8 +446,8 @@
         function listenForLibraryData() {
             if (!db || listeners.library) return;
             dom.libraryContent.innerHTML = `<div class="flex justify-center items-center py-20"><div class="spinner animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div></div>`;
-            const shelvesUnsubscribe = onSnapshot(collection(db, "shelves"), s => { allShelves = s.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>a.name.localeCompare(b.name)); if(pages.library.offsetParent) renderShelfList(); }, e => console.error("Shelves listener failed:", e));
-            const booksUnsubscribe = onSnapshot(collection(db, "books"), s => { allBooks = s.docs.map(d=>({id:d.id,...d.data()})); if(pages.library.offsetParent) renderShelfList(); }, e => console.error("Books listener failed:", e));
+            const shelvesUnsubscribe = onSnapshot(collection(db, "shelves"), s => { allShelves = s.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>a.name.localeCompare(b.name)); if(pages.library.offsetParent && dom.libraryContent.dataset.viewing !== 'history') renderShelfList(); }, e => console.error("Shelves listener failed:", e));
+            const booksUnsubscribe = onSnapshot(collection(db, "books"), s => { allBooks = s.docs.map(d=>({id:d.id,...d.data()})); if(pages.library.offsetParent && dom.libraryContent.dataset.viewing !== 'history') renderShelfList(); }, e => console.error("Books listener failed:", e));
             listeners.library = () => { shelvesUnsubscribe(); booksUnsubscribe(); };
         }
         function listenForWishlistData() {
@@ -445,11 +462,12 @@
         }
         function listenForHistoryData() {
             if (!db || listeners.history || !currentUser) return;
-            dom.historyContent.innerHTML = `<div class="flex justify-center items-center py-20"><div class="spinner animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div></div>`;
             const q = query(collection(db, "borrowingHistory"), where("studentRollNo", "==", currentUser.rollNo), orderBy("issuedDate", "desc"));
             listeners.history = onSnapshot(q, snapshot => {
                 myHistory = snapshot.docs.map(doc => doc.data());
-                if (pages.history.offsetParent) renderHistoryPage();
+                if (dom.libraryContent.dataset.viewing === 'history') {
+                    renderHistoryView();
+                }
             }, e => console.error("History listener failed:", e));
         }
 
@@ -458,6 +476,9 @@
             dom.libraryContent.innerHTML = '';
             dom.pageTitle.innerHTML = `<svg class="h-6 w-6 mr-2 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg> Library Shelves`;
             dom.libraryContent.dataset.viewing = 'shelves';
+            dom.viewHistoryBtn.style.display = 'flex';
+            dom.searchContainer.style.display = 'block';
+
             if (allShelves.length === 0) { dom.libraryContent.innerHTML = `<p class="text-center text-gray-500 py-10">No shelves found.</p>`; return; }
             const shelfListContainer = document.createElement('div');
             shelfListContainer.className = 'space-y-3';
@@ -507,8 +528,20 @@
                 dom.demandsContent.appendChild(card);
             });
         }
-        function renderHistoryPage() {
-            dom.historyContent.innerHTML = '';
+        function renderHistoryView() {
+            dom.libraryContent.dataset.viewing = 'history';
+            dom.pageTitle.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> Borrowing History`;
+            dom.viewHistoryBtn.style.display = 'none';
+            dom.searchContainer.style.display = 'none';
+
+            const backButton = document.createElement('button');
+            backButton.className = 'text-indigo-600 font-semibold mb-4 flex items-center';
+            backButton.innerHTML = `<svg class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg> Back to Library`;
+            backButton.addEventListener('click', () => renderShelfList());
+
+            const historyContent = document.createElement('div');
+            historyContent.className = 'space-y-8';
+
             const currentlyBorrowed = myHistory.filter(item => item.status === 'borrowed');
             const returnedHistory = myHistory.filter(item => item.status === 'returned');
             let currentHtml = `<div><h2 class="text-xl font-semibold mb-3">Currently Borrowed</h2>`;
@@ -519,7 +552,11 @@
             if (returnedHistory.length === 0) { returnedHtml += `<div class="bg-white rounded-lg p-4 text-center text-gray-500 shadow">Your borrowing history is empty.</div>`; } 
             else { returnedHtml += `<div class="space-y-3">${returnedHistory.map(createHistoryCard).join('')}</div>`; }
             returnedHtml += `</div>`;
-            dom.historyContent.innerHTML = currentHtml + returnedHtml;
+            
+            historyContent.innerHTML = currentHtml + returnedHtml;
+            dom.libraryContent.innerHTML = '';
+            dom.libraryContent.appendChild(backButton);
+            dom.libraryContent.appendChild(historyContent);
         }
         function renderProfile() {
             if (!currentUser) return;
@@ -682,7 +719,7 @@
             dom.wishlistBtn.className = `w-full font-bold py-2 rounded-lg mt-4 transition ${isWishlisted ? 'bg-gray-200 text-gray-800' : 'bg-pink-500 text-white'}`;
             dom.wishlistBtn.onclick = () => toggleWishlist(book);
             await renderAverageRating(book.id);
-            await renderReviews(book.id);
+            await renderReviews(book.id, 2); // Show only 2 reviews in modal
             initializeStarRatingInput();
             dom.modal.classList.remove('opacity-0', 'pointer-events-none');
         }
@@ -696,22 +733,36 @@
             const starsHTML = generateStarsHTML(avgRating);
             dom.modalAvgRating.innerHTML = `${starsHTML} <span class="ml-2">(${reviewCount} reviews)</span>`;
         }
-        async function renderReviews(bookId) {
-            dom.modalReviewsList.innerHTML = `<p class="text-gray-500">Loading reviews...</p>`;
+        async function renderReviews(bookId, limit) {
+            const container = limit ? dom.modalReviewsList : dom.reviewsContent;
+            container.innerHTML = `<p class="text-gray-500">Loading reviews...</p>`;
+            
             const reviewsQuery = query(collection(db, `books/${bookId}/reviews`), orderBy('timestamp', 'desc'));
             const querySnapshot = await getDocs(reviewsQuery);
-            if (querySnapshot.empty) {
-                dom.modalReviewsList.innerHTML = `<p class="text-gray-500">No reviews yet. Be the first!</p>`;
+            const reviews = querySnapshot.docs;
+
+            if (reviews.length === 0) {
+                container.innerHTML = `<p class="text-gray-500">No reviews yet. Be the first!</p>`;
+                dom.seeAllReviewsBtn.classList.add('hidden');
                 return;
             }
-            dom.modalReviewsList.innerHTML = '';
-            querySnapshot.forEach(doc => {
+
+            container.innerHTML = '';
+            const reviewsToDisplay = limit ? reviews.slice(0, limit) : reviews;
+            
+            reviewsToDisplay.forEach(doc => {
                 const review = doc.data();
                 const reviewEl = document.createElement('div');
                 reviewEl.className = 'border-t pt-3';
                 reviewEl.innerHTML = `<div class="flex items-center mb-1">${generateStarsHTML(review.rating)}<p class="ml-2 font-semibold text-sm">${review.studentName || 'Anonymous'}</p></div><p class="text-gray-600 text-sm">${review.comment}</p>`;
-                dom.modalReviewsList.appendChild(reviewEl);
+                container.appendChild(reviewEl);
             });
+            
+            if (limit && reviews.length > limit) {
+                dom.seeAllReviewsBtn.classList.remove('hidden');
+            } else {
+                dom.seeAllReviewsBtn.classList.add('hidden');
+            }
         }
         function initializeStarRatingInput() {
             const starRatingContainer = dom.addReviewForm.querySelector('.star-rating');
@@ -768,7 +819,7 @@
                 const totalRating = reviewsSnap.docs.reduce((sum, doc) => sum + doc.data().rating, 0);
                 const averageRating = totalRating / reviewCount;
                 await updateDoc(bookRef, { reviewCount, averageRating });
-                await renderReviews(currentOpenBookId);
+                await renderReviews(currentOpenBookId, 2);
                 await renderAverageRating(currentOpenBookId);
                 dom.reviewComment.value = '';
                 starRatingContainer.dataset.rating = 0;
@@ -781,6 +832,18 @@
                 dom.submitReviewBtn.disabled = false;
                 dom.submitReviewBtn.textContent = 'Submit Review';
             }
+        });
+        dom.seeAllReviewsBtn.addEventListener('click', () => {
+            closeModal();
+            showPage('reviews');
+            const book = allBooks.find(b => b.id === currentOpenBookId);
+            dom.reviewsPageTitle.textContent = `Reviews for ${book.title}`;
+            renderReviews(currentOpenBookId); // Render all reviews on the dedicated page
+        });
+        dom.backToModalBtn.addEventListener('click', () => {
+            pages.reviews.classList.add('hidden');
+            const book = allBooks.find(b => b.id === currentOpenBookId);
+            showModal(book);
         });
 
         // --- Academic Resources ---
@@ -841,6 +904,12 @@
         dom.academicsQpapersCard.addEventListener('click', () => showPage('qpapers'));
         dom.backToAcademicsBtn1.addEventListener('click', () => showPage('academics'));
         dom.backToAcademicsBtn2.addEventListener('click', () => showPage('academics'));
+        dom.viewHistoryBtn.addEventListener('click', () => {
+            if (!listeners.history) {
+                listenForHistoryData();
+            }
+            renderHistoryView();
+        });
 
     </script>
 </body>
