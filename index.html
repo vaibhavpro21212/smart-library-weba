@@ -61,9 +61,14 @@
         <div class="flex flex-col h-full justify-between">
             <main class="overflow-y-auto pb-20">
                 <div id="library-page">
-                     <header class="bg-white shadow-sm sticky top-0 z-20">
+                    <header class="bg-white shadow-sm sticky top-0 z-20">
                         <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
-                            <h1 id="page-title" class="text-2xl font-bold text-gray-900 flex items-center"></h1>
+                            <div class="flex justify-between items-center">
+                                <h1 id="page-title" class="text-2xl font-bold text-gray-900 flex items-center"></h1>
+                                <button class="header-notice-btn text-gray-500 hover:text-indigo-600 p-1 rounded-full">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                                </button>
+                            </div>
                             <div id="search-container" class="mt-4">
                                 <input type="text" id="search-input" placeholder="Search all books..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
                             </div>
@@ -72,18 +77,30 @@
                     <div id="library-content" class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 px-4"></div>
                 </div>
                 <div id="wishlist-page" class="hidden">
-                     <header class="bg-white shadow-sm sticky top-0 z-20">
-                        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8"><h1 class="text-2xl font-bold text-gray-900 flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
-                            My Wishlist</h1></div>
+                    <header class="bg-white shadow-sm sticky top-0 z-20">
+                        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+                            <h1 class="text-2xl font-bold text-gray-900 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+                                My Wishlist
+                            </h1>
+                            <button class="header-notice-btn text-gray-500 hover:text-indigo-600 p-1 rounded-full">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                            </button>
+                        </div>
                     </header>
                     <div id="wishlist-content" class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 px-4"></div>
                 </div>
-                 <div id="demands-page" class="hidden">
+                <div id="demands-page" class="hidden">
                     <header class="bg-white shadow-sm sticky top-0 z-20">
-                        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8"><h1 class="text-2xl font-bold text-gray-900 flex items-center">
-                           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-                           Book Demands</h1></div>
+                        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+                            <h1 class="text-2xl font-bold text-gray-900 flex items-center">
+                               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                               Book Demands
+                            </h1>
+                            <button class="header-notice-btn text-gray-500 hover:text-indigo-600 p-1 rounded-full">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                            </button>
+                        </div>
                     </header>
                     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 px-4 space-y-6">
                         <div class="bg-white p-4 rounded-lg shadow">
@@ -99,9 +116,15 @@
                 </div>
                 <div id="academics-page" class="hidden">
                     <header class="bg-white shadow-sm sticky top-0 z-20">
-                        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8"><h1 class="text-2xl font-bold text-gray-900 flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 14l9-5-9-5-9 5 9 5z" /><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222 4 2.222V20M12 14.75L2 10l10-5.25L22 10l-10 4.75z" /></svg>
-                            Academic Resources</h1></div>
+                        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+                            <h1 class="text-2xl font-bold text-gray-900 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 14l9-5-9-5-9 5 9 5z" /><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222 4 2.222V20M12 14.75L2 10l10-5.25L22 10l-10 4.75z" /></svg>
+                                Academic Resources
+                            </h1>
+                            <button class="header-notice-btn text-gray-500 hover:text-indigo-600 p-1 rounded-full">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                            </button>
+                        </div>
                     </header>
                     <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 px-4 space-y-4">
                         <div id="academics-research-card" class="card bg-white rounded-lg p-4 flex justify-between items-center cursor-pointer">
@@ -119,9 +142,9 @@
                         <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
                             <button id="back-to-academics-btn-1" class="text-indigo-600 font-semibold mb-4 flex items-center"><svg class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" /></svg> Back</button>
                             <h1 class="text-2xl font-bold text-gray-900 flex items-center">Research Papers</h1>
-                             <div class="mt-4">
-                                <input type="search" id="research-search-input" placeholder="Search by title or author..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
-                            </div>
+                                <div class="mt-4">
+                                    <input type="search" id="research-search-input" placeholder="Search by title or author..." class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500">
+                                </div>
                         </div>
                     </header>
                     <div id="research-content" class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 px-4"></div>
@@ -149,7 +172,7 @@
                                 </div>
                                 <div>
                                     <label for="filter-semester" class="block text-sm font-medium text-gray-700">Semester</label>
-                                     <select id="filter-semester" class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 bg-white">
+                                    <select id="filter-semester" class="mt-1 block w-full border border-gray-300 rounded-md py-2 px-3 bg-white">
                                         <option value="">All</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option>
                                     </select>
                                 </div>
@@ -162,52 +185,79 @@
                     </div>
                 </div>
                 <div id="history-page" class="hidden">
-                     <header class="bg-white shadow-sm sticky top-0 z-20">
-                        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8"><h1 class="text-2xl font-bold text-gray-900 flex items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            Borrowing History
-                        </h1></div>
+                        <header class="bg-white shadow-sm sticky top-0 z-20">
+                            <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+                                <h1 class="text-2xl font-bold text-gray-900 flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    Borrowing History
+                                </h1>
+                                <button class="header-notice-btn text-gray-500 hover:text-indigo-600 p-1 rounded-full">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                                </button>
+                            </div>
+                        </header>
+                        <div id="history-content" class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 px-4 space-y-8"></div>
+                </div>
+                <div id="notice-board-page" class="hidden">
+                    <header class="bg-white shadow-sm sticky top-0 z-20">
+                        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8">
+                            <h1 class="text-2xl font-bold text-gray-900 flex items-center">
+                                <svg class="w-6 h-6 mr-2 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                                Notice Board
+                            </h1>
+                        </div>
                     </header>
-                    <div id="history-content" class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 px-4 space-y-8"></div>
+                    <div id="notice-board-content" class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 px-4 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Notices rendered here -->
+                    </div>
                 </div>
                 <div id="profile-page" class="hidden">
-                     <header class="bg-white shadow-sm sticky top-0 z-20">
-                        <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-                            <h1 class="text-2xl font-bold text-gray-900 flex items-center">
-                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
-                                 My Profile</h1>
-                             <button id="logout-btn" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">Logout</button>
-                        </div>
-                    </header>
-                    <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 px-4 space-y-6">
-                        <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center">
-                            <img id="profile-avatar" class="h-24 w-24 rounded-full object-cover mb-4 shadow-md" src="">
-                            <h2 id="profile-name" class="text-xl font-bold text-gray-800"></h2>
-                            <p id="profile-rollno" class="text-gray-500"></p>
-                            <div class="mt-6 border-t pt-6 w-full flex flex-col items-center">
-                                <h3 class="text-lg font-semibold text-gray-700 mb-2">Library Card</h3>
-                                <div class="bg-gray-100 p-4 rounded-lg"><canvas id="qr-code-canvas"></canvas></div>
-                                <p class="text-xs text-gray-400 mt-2">Scan this QR code to issue books.</p>
-                            </div>
-                        </div>
-                        <div class="bg-white rounded-2xl shadow-lg p-6">
-                            <h3 class="text-lg font-semibold text-gray-700 mb-4 text-center">Change Password</h3>
-                            <div class="space-y-4">
-                                <div>
-                                    <label for="current-password-input" class="block text-sm font-medium text-gray-700">Current Password</label>
-                                    <input type="password" id="current-password-input" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg">
-                                </div>
-                                <div>
-                                    <label for="new-password-input" class="block text-sm font-medium text-gray-700">New Password</label>
-                                    <input type="password" id="new-password-input" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg">
+                        <header class="bg-white shadow-sm sticky top-0 z-20">
+                            <div class="max-w-7xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+                                <h1 class="text-2xl font-bold text-gray-900 flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                                    My Profile</h1>
+                                <div class="flex items-center space-x-4">
+                                    <button class="header-notice-btn text-gray-500 hover:text-indigo-600 p-1 rounded-full">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                                    </button>
+                                    <button id="logout-btn" class="text-sm font-medium text-indigo-600 hover:text-indigo-800">Logout</button>
                                 </div>
                             </div>
-                            <p id="password-change-status" class="text-sm mt-2 text-center h-4"></p>
-                            <button id="change-password-btn" class="mt-4 w-full bg-indigo-600 text-white font-bold py-2.5 px-4 rounded-lg hover:bg-indigo-700">Update Password</button>
+                        </header>
+                        <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 px-4 space-y-6">
+                            <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center">
+                                <img id="profile-avatar" class="h-24 w-24 rounded-full object-cover mb-4 shadow-md" src="">
+                                <h2 id="profile-name" class="text-xl font-bold text-gray-800"></h2>
+                                <p id="profile-rollno" class="text-gray-500"></p>
+                                <div class="mt-6 border-t pt-6 w-full flex flex-col items-center">
+                                    <h3 class="text-lg font-semibold text-gray-700 mb-2">Library Card</h3>
+                                    <div class="bg-gray-100 p-4 rounded-lg"><canvas id="qr-code-canvas"></canvas></div>
+                                    <p class="text-xs text-gray-400 mt-2">Scan this QR code to issue books.</p>
+                                </div>
+                            </div>
+                             <div id="view-history-card" class="card bg-white rounded-lg p-4 flex justify-between items-center cursor-pointer">
+                                <h3 class="font-semibold text-gray-800 flex items-center"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>My Borrowing History</h3>
+                                <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                            </div>
+                            <div class="bg-white rounded-2xl shadow-lg p-6">
+                                <h3 class="text-lg font-semibold text-gray-700 mb-4 text-center">Change Password</h3>
+                                <div class="space-y-4">
+                                    <div>
+                                        <label for="current-password-input" class="block text-sm font-medium text-gray-700">Current Password</label>
+                                        <input type="password" id="current-password-input" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg">
+                                    </div>
+                                    <div>
+                                        <label for="new-password-input" class="block text-sm font-medium text-gray-700">New Password</label>
+                                        <input type="password" id="new-password-input" class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg">
+                                    </div>
+                                </div>
+                                <p id="password-change-status" class="text-sm mt-2 text-center h-4"></p>
+                                <button id="change-password-btn" class="mt-4 w-full bg-indigo-600 text-white font-bold py-2.5 px-4 rounded-lg hover:bg-indigo-700">Update Password</button>
+                            </div>
                         </div>
-                    </div>
                 </div>
             </main>
             
@@ -225,7 +275,7 @@
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
                         <span class="text-xs font-medium">Demands</span>
                     </button>
-                     <button id="nav-academics" class="nav-item flex flex-col items-center text-gray-500">
+                    <button id="nav-academics" class="nav-item flex flex-col items-center text-gray-500">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 14l9-5-9-5-9 5 9 5z" /><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222 4 2.222V20M12 14.75L2 10l10-5.25L22 10l-10 4.75z" /></svg>
                         <span class="text-xs font-medium">Academics</span>
                     </button>
@@ -284,15 +334,16 @@
             appId: "1:524474984955:web:4cb81fb71499be9425835e"
         };
         let db;
-        let allShelves = [], allBooks = [], allDemands = [], myWishlistBooks = [], myHistory = [], allResearchPapers = [];
+        let allShelves = [], allBooks = [], allDemands = [], myWishlistBooks = [], myHistory = [], allResearchPapers = [], allNotices = [];
         let currentUser = null;
-        let listeners = { library: null, wishlist: null, demands: null, history: null, research: null };
+        let listeners = { library: null, wishlist: null, demands: null, history: null, research: null, notices: null };
         let currentOpenBookId = null;
         const pages = {
             login: document.getElementById('login-page'), main: document.getElementById('main-app'), library: document.getElementById('library-page'),
             wishlist: document.getElementById('wishlist-page'), demands: document.getElementById('demands-page'), 
             academics: document.getElementById('academics-page'), research: document.getElementById('research-page'),
             qpapers: document.getElementById('qpapers-page'), history: document.getElementById('history-page'),
+            'notice-board': document.getElementById('notice-board-page'),
             profile: document.getElementById('profile-page')
         };
         const navItems = {
@@ -307,9 +358,11 @@
             logoutBtn: document.getElementById('logout-btn'), forgotPasswordLink: document.getElementById('forgot-password-link'),
             libraryContent: document.getElementById('library-content'), wishlistContent: document.getElementById('wishlist-content'),
             demandsContent: document.getElementById('demands-content'), historyContent: document.getElementById('history-content'),
+            noticeBoardContent: document.getElementById('notice-board-content'),
             pageTitle: document.getElementById('page-title'), searchInput: document.getElementById('search-input'), 
             profileAvatar: document.getElementById('profile-avatar'), profileName: document.getElementById('profile-name'), 
             profileRollNo: document.getElementById('profile-rollno'), qrCodeCanvas: document.getElementById('qr-code-canvas'),
+            viewHistoryCard: document.getElementById('view-history-card'),
             demandTitleInput: document.getElementById('demand-title'), demandAuthorInput: document.getElementById('demand-author'),
             demandSubmitBtn: document.getElementById('demand-submit-btn'), toast: document.getElementById('toast'),
             modal: document.getElementById('modal'), modalContent: document.getElementById('modal-content'), 
@@ -358,7 +411,7 @@
             currentUser = null;
             localStorage.removeItem('loggedInStudentRollNo');
             Object.values(listeners).forEach(unsubscribe => unsubscribe && unsubscribe());
-            listeners = { library: null, wishlist: null, demands: null, history: null, research: null };
+            listeners = { library: null, wishlist: null, demands: null, history: null, research: null, notices: null };
         }
         async function checkLoginState() {
             const loggedInRollNo = localStorage.getItem('loggedInStudentRollNo');
@@ -408,7 +461,7 @@
             Object.values(pages).forEach(p => p.classList.add('hidden'));
             pages.main.classList.remove('hidden');
             if (pages[pageId]) {
-                 pages[pageId].classList.remove('hidden');
+                pages[pageId].classList.remove('hidden');
             }
             Object.values(navItems).forEach(n => n.classList.remove('active'));
             if(navItems[pageId]) navItems[pageId].classList.add('active');
@@ -420,10 +473,13 @@
                 case 'research': if(!listeners.research) listenForResearchPapers(); else renderResearchPapers(dom.researchSearchInput.value); break;
                 case 'qpapers': populateYearFilter(); dom.filterQpapersBtn.click(); break;
                 case 'history': if (!listeners.history) listenForHistoryData(); else renderHistoryPage(); break;
+                case 'notice-board': if (!listeners.notices) listenForNoticesData(); break;
                 case 'profile': renderProfile(); break;
             }
         }
         Object.keys(navItems).forEach(id => navItems[id].addEventListener('click', () => showPage(id)));
+        document.querySelectorAll('.header-notice-btn').forEach(btn => btn.addEventListener('click', () => showPage('notice-board')));
+
 
         // --- Data Listeners ---
         function listenForLibraryData() {
@@ -451,6 +507,15 @@
                 myHistory = snapshot.docs.map(doc => doc.data());
                 if (pages.history.offsetParent) renderHistoryPage();
             }, e => console.error("History listener failed:", e));
+        }
+        function listenForNoticesData() {
+            if (!db || listeners.notices) return;
+            dom.noticeBoardContent.innerHTML = `<div class="flex justify-center items-center py-20"><div class="spinner animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div></div>`;
+            const q = query(collection(db, "notices"), orderBy("timestamp", "desc"));
+            listeners.notices = onSnapshot(q, (snapshot) => {
+                allNotices = snapshot.docs.map(doc => doc.data());
+                if (pages['notice-board'].offsetParent) renderNoticeBoardPage();
+            }, e => console.error("Notices listener failed:", e));
         }
 
         // --- Page Rendering Functions ---
@@ -521,6 +586,28 @@
             returnedHtml += `</div>`;
             dom.historyContent.innerHTML = currentHtml + returnedHtml;
         }
+        function renderNoticeBoardPage() {
+            const container = dom.noticeBoardContent;
+            container.innerHTML = '';
+            if (allNotices.length === 0) {
+                container.innerHTML = `<p class="text-center text-gray-500 py-10 col-span-full">No notices have been published yet.</p>`;
+                return;
+            }
+            allNotices.forEach(notice => {
+                const card = document.createElement('div');
+                card.className = 'card bg-white rounded-lg shadow-sm overflow-hidden';
+                const date = notice.timestamp?.toDate().toLocaleDateString() || 'N/A';
+                card.innerHTML = `
+                    ${notice.imageUrl ? `<img src="${notice.imageUrl}" class="h-48 w-full object-cover">` : ''}
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-2">${notice.title}</h3>
+                        <p class="text-sm text-gray-600 mb-3">${notice.description}</p>
+                        <p class="text-xs text-gray-400">Posted: ${date}</p>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
         function renderProfile() {
             if (!currentUser) return;
             dom.profileName.textContent = currentUser.name || currentUser.rollNo;
@@ -539,7 +626,7 @@
             const bookGrid = document.createElement('div');
             bookGrid.className = 'grid grid-cols-2 md:grid-cols-3 gap-4';
             if (books.length > 0) { books.forEach(book => bookGrid.appendChild(createBookCard(book))); }
-             else { bookGrid.innerHTML = `<p class="text-gray-500 col-span-full text-center">No books found for your search.</p>`; }
+            else { bookGrid.innerHTML = `<p class="text-gray-500 col-span-full text-center">No books found for your search.</p>`; }
             dom.libraryContent.appendChild(bookGrid);
         }
 
@@ -604,6 +691,7 @@
             const filteredBooks = allBooks.filter(book => book.title.toLowerCase().includes(searchTerm) || book.author.toLowerCase().includes(searchTerm));
             renderSearchResults(filteredBooks);
         });
+        dom.viewHistoryCard.addEventListener('click', () => showPage('history'));
         async function toggleWishlist(book) {
             if (!currentUser) return;
             const wishlistRef = doc(db, "wishlists", currentUser.rollNo, "books", book.id);
@@ -845,5 +933,4 @@
     </script>
 </body>
 </html>
-
 
